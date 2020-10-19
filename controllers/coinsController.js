@@ -16,15 +16,18 @@ const controllers = {
         gzip: true
       };
       
-      rp(requestOptions).then(response => {
-        res.render('homepage', {
-          pageTitle: "Start your Tokofolio today!",
-          tokenIndex: coinsModel,
-          items: response.data
-      })
-      }).catch((err) => {
-        console.log('API call error:', err.message);
-      });
+      
+        rp(requestOptions).then(response => {
+          res.render('homepage', {
+            pageTitle: "Start your Tokofolio today!",
+            tokenIndex: coinsModel,
+            items: response.data
+        })
+        }).catch((err) => {
+          console.log('API call error:', err.message);
+        });
+      
+      
         
 
     },
@@ -37,7 +40,7 @@ const controllers = {
         let search = req.query.search
         const requestOptions = {
             method: 'GET',
-            uri: `https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?symbol=${search}`,
+            uri: `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=${search}`,
             headers: {
               'X-CMC_PRO_API_KEY': 'f7eb16ab-8a3c-4086-8d33-1e76b4cfe6d3'
             },
@@ -48,7 +51,7 @@ const controllers = {
           rp(requestOptions).then(response => {
             res.render('portfolio', {
                 pageTitle: "Show Coin",
-                items: response.data
+                items: Object.values(response.data)
             })
           }).catch((err) => {
             console.log('API call error:', err.message);

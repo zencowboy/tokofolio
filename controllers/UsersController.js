@@ -2,6 +2,7 @@ const uuid = require('uuid')
 // const bcrypt = require('bcrypt')
 const SHA256 = require("crypto-js/sha256")
 const UserModel = require('../models/users')
+const rp = require('request-promise');
 
 const controllers = {
 
@@ -59,7 +60,8 @@ const controllers = {
                     hash: hash
                 })
                     .then(createResult => {
-                        res.redirect('/')
+                        req.session.user = createResult
+                        res.redirect('/users/dashboard')
                     })
                     .catch(err => {
                         res.redirect('/users/register')
@@ -108,7 +110,32 @@ const controllers = {
                 console.log(err)
                 res.redirect('/users/login')
             })
-    }
+    },
+    dashboard: (req, res) => {
+        const requestOptions = {
+            method: 'GET',
+            uri: `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=btc,eth,xrp,bnb,eos,ltc,usdt,xtz,bch,bsv,link,dot,ada,xmr,trx,xlm,neo`,
+            headers: {
+              'X-CMC_PRO_API_KEY': 'f7eb16ab-8a3c-4086-8d33-1e76b4cfe6d3'
+            },
+            json: true,
+            gzip: true
+          };
+          if(req.session.user){
+            rp(requestOptions).then(response => {
+                res.render('users/dashboard', {
+                    user: req.session.user,
+                    items: response.data,
+                })
+            }).catch((err) => {
+                console.log('API call error:', err.message);
+            });
+            
+          }else{
+            res.redirect('login')
+          }
+        
+    },
 
 }
 

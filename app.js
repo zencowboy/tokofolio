@@ -1,6 +1,7 @@
 // =======================================
 //              DEPENDENCIES
 // =======================================
+require("dotenv").config();
 const express = require('express')
 const methodOverride = require('method-override')
 const mongoose = require('mongoose')
@@ -12,9 +13,10 @@ const port = 5000;
 // =======================================
 //              MONGOOSE
 // =======================================
-const mongoURI = 'mongodb://localhost:27017/tokofolio'
-mongoose.set('useFindAndModify', false)
-mongoose.connect( mongoURI, { useNewUrlParser: true, useUnifiedTopology: true } )
+
+const mongoURI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`
+// mongoose.set('useFindAndModify', false)
+// mongoose.connect( mongoURI, { useNewUrlParser: true, useUnifiedTopology: true } )
 
 const coinsController = require('./controllers/coinsController')
 
@@ -67,34 +69,41 @@ app.post('/users/register', usersController.register)
 // user login form route
 app.get('/users/login', usersController.showLoginForm)
 
+app.post('/users/login', usersController.login)
+
+
+// user dashboard
+app.get('/users/dashboard', usersController.dashboard)
+
 
 /**
  * USER ON-BOARDING ROUTES
  */
 
-// user registration form route
-app.get('/users/register', guestOnlyMiddleware, usersController.showRegistrationForm)
+// // user registration form route
+// app.get('/users/register', guestOnlyMiddleware, usersController.showRegistrationForm)
 
-// user registration
-app.post('/users/register', guestOnlyMiddleware, usersController.register)
+// // user registration
+// app.post('/users/register', guestOnlyMiddleware, usersController.register)
 
-// user login form route
-app.get('/users/login', guestOnlyMiddleware, usersController.showLoginForm)
+// // user login form route
+// app.get('/users/login', guestOnlyMiddleware, usersController.showLoginForm)
 
-// user login route
-app.post('/users/login', guestOnlyMiddleware, usersController.login)
+// // user login route
+// app.post('/users/login', guestOnlyMiddleware, usersController.login)
 
-/**
- * USER-ONLY ROUTES
- */
+// /**
+//  * USER-ONLY ROUTES
+//  */
 
- // user dashboard
- app.get('/users/dashboard', usersController.dashboard)
+//  // user dashboard
+//  app.get('/users/dashboard', usersController.dashboard)
 
 
 // / =======================================
 //              LISTENER
 // =======================================
+console.log(mongoURI)
 mongoose.connect( mongoURI, { useNewUrlParser: true, useUnifiedTopology: true } )
 .then(response => {
 
@@ -103,7 +112,7 @@ app.listen(port, () => {
   console.log(`Tokofolio listening on port: ${port}`)
 })
 })
-.catch(er => {
+.catch(err => {
   console.log(err)
 })
 

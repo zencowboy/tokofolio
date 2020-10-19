@@ -35,7 +35,7 @@
     <div class="container">
         <ul class="search-list">
             <% items.forEach( (item) => { %>
-                <li><%= 'Name: ' + item.name+' symbol: '+ item.symbol %></li>
+                <li><%= 'Name: ' + item.name+' symbol: '+ item.symbol + 'Price: '+item.quote.USD.price %></li>
             <% }) %> 
         </ul>
     </div>
