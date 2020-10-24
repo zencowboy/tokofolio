@@ -7,59 +7,52 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="../portfolio_style.css">
-   
+    
     <title>Tokofolio</title>
 </head>
 <body>  
 
- <nav class="navbar navbar-expand-lg navbar-light bg-light"> -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-      </li> -->
-     <%if(loginStatus){%>
-        <li class="nav-item">
-          <a class="nav-link" href="/../users/logout">Logout</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/../users/dashboard">My Tokofolio</a>
-        </li>
-       <%}else{%> -->
-        <li class="nav-item">
-          <a class="nav-link" href="/../users/login">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/../users/register">Register</a>
-        </li>
-        
-      <%}%>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/../users/login">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/../users/register">Register</a>
+      </li>
     </ul>
   </div>
 </nav>
+<div class="container">         
+    <h1>Add new Token</h1>
 
-    <header>
-        <h1>Search Result</h1>
-    </header>
+<form method="POST" action="/users/dashboard/new">
+    <div class="form-group">
     
-    <div class="container">
-        <ul class="search-list">
-            <% items.forEach( (item) => { %>
-                <li><%= 'Name: ' + item.name %></li>
-                <li><%= 'symbol: '+ item.symbol%></li> 
-                <li><%= 'Price: '+item.quote.USD.price %></li>
-                <li><%= 'Volume 24h: '+item.quote.USD.volume_24h %></li>
-                <li><%= 'Percent change last 1h: '+item.quote.USD.percent_change_1h %></li>
-                <li><%= 'Percent change last 24h: '+item.quote.USD.percent_change_24h %></li>
-                <li><%= 'Percent change last 1d: '+item.quote.USD.percent_change_7d %></li>
-                <li><a href = '/users/dashboard/new?symbol=<%=item.symbol%>&price=<%=item.quote.USD.price%>'><button type="submit" class="btn btn-primary">Add to Tokofolio</button></a></li>
-            <%})%> 
-        </ul>
-
+      <input type="text"placeholder="Symbol" value='<%=inputs.symbol%>' STYLE="color: white; font-family: Verdana; font-weight: bold; font-size: 12px; background-color: #87bbf0;" size="20" maxlength="30" class="form-control"  id="symbol" name="symbol">
     </div>
+    <div class="form-group">
+   
+      <input type="date" placeholder="Date" STYLE="color: white; font-family: Verdana; font-weight: bold; font-size: 12px; background-color: #87bbf0;" size="20" maxlength="30" class="form-control" id="date" name="date">
+    </div>
+    <div class="form-group">
+      
+        <input type="text"placeholder="Quantity" STYLE="color: white; font-family: Verdana; font-weight: bold; font-size: 12px; background-color: #87bbf0;" size="20" maxlength="30" class="form-control" id="qty" name="qty">
+      </div>
+      <div class="form-group">
+   
+        <input type="text" placeholder="Price" value='<%=inputs.price%>' STYLE="color: white; font-family: Verdana; font-weight: bold; font-size: 12px; background-color: #87bbf0;" size="20" maxlength="30"class="form-control" id="price" name="price">
+      </div>
+     
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 
-    
-  
+</div>
+
 
   <!-- Font Awesome -->
   <script

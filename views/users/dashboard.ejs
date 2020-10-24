@@ -6,8 +6,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="../style.css">
-    <script src="main.js" defer></script>
+    <link rel="stylesheet" href="../user_style.css">
+    
     <title>Tokofolio</title>
 </head>
 <body>  
@@ -25,25 +25,69 @@
       <li class="nav-item active">
         <a class="nav-link" href="/"><img src="/./../tokofolio_logo1.svg" alt width='72' height='72'> <span class="sr-only"></span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/../users/login">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/../users/register">Register</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/../users/dashboard">My Tokofolio</a>
-      </li>
+      <%if(loginStatus){%>
+        <li class="nav-item">
+          <a class="nav-link" href="/../users/logout">Logout</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        
+      <%}else{%>
+        <li class="nav-item">
+          <a class="nav-link" href="/../users/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/../users/register">Register</a>
+        </li>
+        
+      <%}%>
     </ul>
   </div>
 </nav>
     
     <div class="container">
 
-        <h1>Welcome to your Tokofolio</h1>
+        <h1>Welcome to your Tokofolio  <div class="action-button" id= "portfolio-submit">
+          <button type="submit" class="btn btn-primary">Add to Tokofolio</button>
+      </div></h1> 
+        
+        
 
-        <%=JSON.stringify(user)%>
+         <!-- <%=JSON.stringify(user)%>  -->
 
+        <table class = "table">
+          <thead class= "thead-dark">
+        <tr>
+
+          <th>Token</th>
+          <th>Date</th>
+          <th>Qty</th>
+          <th>Price buy</th>
+          <th>Price today</th>
+          <th>P/L</th>
+        
+      </tr>
+      </thead>
+      <% let total = 0; %>
+      <% user.portfolio.forEach((item, index) => { %>
+        <tr>
+          <td><%= item.symbol%></td>
+          <td><%= item.date%></td>
+          <td><%= item.qty%></td>
+          <td><%= item.price%></td>
+          <%
+            let current = Math.round(items[item.symbol.toUpperCase()].quote.USD.price*1000)/1000
+            let profit = (current - item.price) * item.qty
+          %>
+          <td><%= current%></td>
+          <td style='color: <%=profit>0?'green':'red'%>'><%= profit %></td>
+        </tr>
+        <% 
+       total += profit;
+      } ) %>
+        </table>
+<p>Total: $<span style='color:<%=total>0?'green':'red'%>'><%= total %></span></p>
     </div>
 
   <!-- Font Awesome -->
@@ -55,6 +99,19 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-  
+    <script>
+      const marqueeContent = document.querySelector("ul.marquee-content");
+    
+    
+      const root = document.documentElement;
+      const marqueeElementsDisplayed = getComputedStyle(root).getPropertyValue("--marquee-elements-displayed");
+    
+    
+      root.style.setProperty("--marquee-elements", marqueeContent.children.length);
+    
+      for(let i=0; i<marqueeElementsDisplayed; i++) {
+        marqueeContent.appendChild(marqueeContent.children[i].cloneNode(true));
+      }
+    </script>
 </body>
 </html>

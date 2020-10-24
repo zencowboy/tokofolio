@@ -21,7 +21,8 @@ const controllers = {
           res.render('homepage', {
             pageTitle: "Start your Tokofolio today!",
             tokenIndex: coinsModel,
-            items: response.data
+            items: response.data,
+            loginStatus: Boolean(req.session.user)
         })
         }).catch((err) => {
           console.log('API call error:', err.message);
@@ -38,6 +39,8 @@ const controllers = {
     },
     showCoins: (req, res) => {
         let search = req.query.search
+                            loginStatus: Boolean(req.session.user)
+
         const requestOptions = {
             method: 'GET',
             uri: `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=${search}`,
@@ -51,6 +54,7 @@ const controllers = {
           rp(requestOptions).then(response => {
             res.render('portfolio', {
                 pageTitle: "Show Coin",
+                loginStatus: Boolean(req.session.user),
                 items: Object.values(response.data)
             })
           }).catch((err) => {

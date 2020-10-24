@@ -3,6 +3,7 @@ const uuid = require('uuid')
 const SHA256 = require("crypto-js/sha256")
 const UserModel = require('../models/users')
 const rp = require('request-promise');
+const { render } = require('ejs');
 
 const controllers = {
 
@@ -74,7 +75,6 @@ const controllers = {
     },
 
     login: (req, res) => {
-        // validate input here on your own
 
         // gets user with the given email
         UserModel.findOne({
@@ -111,21 +111,36 @@ const controllers = {
                 res.redirect('/users/login')
             })
     },
+    logout: (req, res) => {
+
+        req.session.destroy(function(err) {
+            console.log(err)
+          })
+        res.redirect('../')
+            
+    },
     dashboard: (req, res) => {
+        if(req.session.user){
+            let defaultList = 'btc,eth,xrp,bnb,eos,ltc,usdt,xtz,bch,bsv,link,dot,ada,xmr,trx,xlm,neo'.split(',')
+            let list = Array.from(new Set([...req.session.user.portfolio.map(i=>i.symbol),...defaultList]))
+            console.log(list)
+        
         const requestOptions = {
             method: 'GET',
-            uri: `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=btc,eth,xrp,bnb,eos,ltc,usdt,xtz,bch,bsv,link,dot,ada,xmr,trx,xlm,neo`,
+            uri: `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=${list.join()}`,
             headers: {
               'X-CMC_PRO_API_KEY': 'f7eb16ab-8a3c-4086-8d33-1e76b4cfe6d3'
             },
             json: true,
             gzip: true
           };
-          if(req.session.user){
+          
             rp(requestOptions).then(response => {
                 res.render('users/dashboard', {
                     user: req.session.user,
                     items: response.data,
+                    loginStatus: Boolean(req.session.user)
+
                 })
             }).catch((err) => {
                 console.log('API call error:', err.message);
@@ -134,9 +149,46 @@ const controllers = {
           }else{
             res.redirect('login')
           }
-        
+           
     },
 
+    newToken: (req, res) => {
+        res.render("users/new",{
+            inputs:req.query 
+        })
+    },
+
+    createToken: (req, res) => {
+        if(req.session.user){
+            //update the user
+            const newToken = {symbol:req.body.symbol, date:req.body.date, price:req.body.price, buy:req.body.buy, qty:req.body.qty}
+            
+            console.log(req.session.user)
+            req.session.user.portfolio.push(newToken)
+            //also need to update seesion
+        UserModel.update(
+            {
+                email: req.session.user.email//'kevin@gmail.com'
+            },
+            {
+                $push:{
+                    portfolio: newToken
+                }         
+            })
+
+            .then(data =>
+                res.redirect('../dashboard')
+            )
+            .catch(err =>
+                console.log(err)
+            )
+
+        }else{
+            res.redirect('../login')
+              
+        }
+    }
 }
+
 
 module.exports = controllers

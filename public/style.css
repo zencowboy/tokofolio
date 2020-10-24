@@ -15,7 +15,7 @@ body {
     align-items: center;
     background-size: 125%;
     background-repeat: no-repeat;
-    background-position: 0 120px;
+    background-position: 0 170px;
 	background-attachment: fixed;
 }
 
@@ -111,7 +111,7 @@ header,
 }
 
 input, button {
-    margin-top: 35px;
+    margin-top: 10px;
     padding: 1.75rem;
     font-size: 2rem;
     font-style: normal;

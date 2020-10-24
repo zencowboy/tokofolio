@@ -69,11 +69,23 @@ app.post('/users/register', usersController.register)
 // user login form route
 app.get('/users/login', usersController.showLoginForm)
 
+// user logout  route
+app.get('/users/logout', usersController.logout)
+
 app.post('/users/login', usersController.login)
 
+// new token
 
-// user dashboard
+app.get('/users/dashboard/new', usersController.newToken)
+
+// // create token
+
+app.post('/users/dashboard/new', usersController.createToken)
+
+// // user dashboard
 app.get('/users/dashboard', usersController.dashboard)
+
+
 
 
 /**
