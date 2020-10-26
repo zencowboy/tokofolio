@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,11 +6,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="../portfolio_style.css">
+    <link rel="stylesheet" href="../../user_style.css">
     
     <title>Tokofolio</title>
 </head>
-<body>  
+<body class="text-center" >  
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -27,30 +27,29 @@
     </ul>
   </div>
 </nav>
-<div class="container">         
+<div class="container login">         
     <h1>Add new Token</h1>
 
 <form method="POST" action="/users/dashboard/new">
     <div class="form-group">
     
-      <input type="text"placeholder="Symbol" value='<%=inputs.symbol%>' STYLE="color: white; font-family: Verdana; font-weight: bold; font-size: 12px; background-color: #87bbf0;" size="20" maxlength="30" class="form-control"  id="symbol" name="symbol">
+      <input type="text"placeholder="Symbol" value='<%=inputs.symbol%>' STYLE="color: grey; font-family: Verdana; font-weight: bold; font-size: 15px; background-color: white;" size="30" maxlength="30" class="form-control"  id="symbol" name="symbol">
     </div>
     <div class="form-group">
    
-      <input type="date" placeholder="Date" STYLE="color: white; font-family: Verdana; font-weight: bold; font-size: 12px; background-color: #87bbf0;" size="20" maxlength="30" class="form-control" id="date" name="date">
+      <input type="date" placeholder="Date" STYLE="color: grey; font-family: Verdana; font-weight: bold; font-size: 15px; background-color: #87bbf0;" size="30" maxlength="30" class="form-control" id="date" name="date">
     </div>
     <div class="form-group">
       
-        <input type="text"placeholder="Quantity" STYLE="color: white; font-family: Verdana; font-weight: bold; font-size: 12px; background-color: #87bbf0;" size="20" maxlength="30" class="form-control" id="qty" name="qty">
+        <input type="text"placeholder="Quantity" STYLE="color: grey; font-family: Verdana; font-weight: bold; font-size: 15px; background-color: #87bbf0;" size="30" maxlength="30" class="form-control" id="qty" name="qty">
       </div>
       <div class="form-group">
    
-        <input type="text" placeholder="Price" value='<%=inputs.price%>' STYLE="color: white; font-family: Verdana; font-weight: bold; font-size: 12px; background-color: #87bbf0;" size="20" maxlength="30"class="form-control" id="price" name="price">
+        <input type="text" placeholder="Price" value='<%=inputs.price%>' STYLE="color: grey; font-family: Verdana; font-weight: bold; font-size: 15px; background-color: #87bbf0;" size="30" maxlength="30"class="form-control" id="price" name="price">
       </div>
      
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-
 </div>
 
 

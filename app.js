@@ -85,31 +85,8 @@ app.post('/users/dashboard/new', usersController.createToken)
 // // user dashboard
 app.get('/users/dashboard', usersController.dashboard)
 
-
-
-
-/**
- * USER ON-BOARDING ROUTES
- */
-
-// // user registration form route
-// app.get('/users/register', guestOnlyMiddleware, usersController.showRegistrationForm)
-
-// // user registration
-// app.post('/users/register', guestOnlyMiddleware, usersController.register)
-
-// // user login form route
-// app.get('/users/login', guestOnlyMiddleware, usersController.showLoginForm)
-
-// // user login route
-// app.post('/users/login', guestOnlyMiddleware, usersController.login)
-
-// /**
-//  * USER-ONLY ROUTES
-//  */
-
-//  // user dashboard
-//  app.get('/users/dashboard', usersController.dashboard)
+// update/delete route
+app.patch('/users/dashboard', usersController.updatePortfolio)
 
 
 // / =======================================

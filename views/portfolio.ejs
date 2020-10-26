@@ -11,13 +11,12 @@
     <title>Tokofolio</title>
 </head>
 <body>  
-
- <nav class="navbar navbar-expand-lg navbar-light bg-light"> -->
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-      </li> -->
+        <a class="nav-link" href="/"><img src="/./../tokofolio_logo1.svg" alt width='72' height='72'> <span class="sr-only"></span></a>
+      </li> 
      <%if(loginStatus){%>
         <li class="nav-item">
           <a class="nav-link" href="/../users/logout">Logout</a>
@@ -25,7 +24,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/../users/dashboard">My Tokofolio</a>
         </li>
-       <%}else{%> -->
+       <%}else{%>
         <li class="nav-item">
           <a class="nav-link" href="/../users/login">Login</a>
         </li>
@@ -37,26 +36,52 @@
     </ul>
   </div>
 </nav>
-
     <header>
         <h1>Search Result</h1>
     </header>
     
     <div class="container">
+      
         <ul class="search-list">
+          <style type="text/css">
+
+          .container {
+
+            margin: auto;
+            width: 30%;
+          }
+           
+            .search-list {
+               background-color: black;
+               text-align: center;
+               color: white;
+                width: 400px;
+                border: .5em solid rgb(143, 138, 239);
+                border-radius: 3em;
+                list-style-type: none;
+                /* box-shadow: 5px 5px #2c3e50; */
+        
+            }
+          </style>
             <% items.forEach( (item) => { %>
-                <li><%= 'Name: ' + item.name %></li>
-                <li><%= 'symbol: '+ item.symbol%></li> 
+              <br/>
+                <li><%= item.name %></li>
+                <br/>
+                <li><%= 'Symbol: '+ item.symbol%></li> 
                 <li><%= 'Price: '+item.quote.USD.price %></li>
                 <li><%= 'Volume 24h: '+item.quote.USD.volume_24h %></li>
                 <li><%= 'Percent change last 1h: '+item.quote.USD.percent_change_1h %></li>
                 <li><%= 'Percent change last 24h: '+item.quote.USD.percent_change_24h %></li>
                 <li><%= 'Percent change last 1d: '+item.quote.USD.percent_change_7d %></li>
+                <br/>
                 <li><a href = '/users/dashboard/new?symbol=<%=item.symbol%>&price=<%=item.quote.USD.price%>'><button type="submit" class="btn btn-primary">Add to Tokofolio</button></a></li>
-            <%})%> 
+              <br/>
+             <%})%> 
         </ul>
 
+
     </div>
+    
 
     
   

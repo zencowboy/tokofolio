@@ -4,6 +4,8 @@ const SHA256 = require("crypto-js/sha256")
 const UserModel = require('../models/users')
 const rp = require('request-promise');
 const { render } = require('ejs');
+//import token logos
+// const tokenLogos = require('./node_modules/cryptocurrency-icons')
 
 const controllers = {
 
@@ -187,7 +189,40 @@ const controllers = {
             res.redirect('../login')
               
         }
-    }
+    },
+
+    updatePortfolio: (req, res) => {
+
+        // find the document in DB,
+        // to ensure that whatever the user
+        // wants to edit, is actually present
+        PortfolioModel.findOne(
+            {
+                email: req.session.user.email//'kevin@gmail.com'
+            }
+        )
+            .then(result => {
+
+                PortfolioModel.update(
+                    {
+                       portfolio: []
+                    }
+                )
+                    .then(updateResult => {
+                        res.redirect('/users/dashboard')
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        res.redirect('/users/dashboard')
+                    })
+
+            })
+            .catch(err => {
+                console.log(err)
+                res.redirect('/users/dashboard')
+            })
+    },
+  
 }
 
 

@@ -99,7 +99,7 @@ h1 {
 }
 
 header {
-    font-size: 2.0rem;
+    font-size: 1.5rem;
 }
 
 header,
@@ -109,6 +109,11 @@ header,
     justify-content: center;
     align-items: center;
 }
+/* .container {
+  margin-top: 150px;
+  text-align: center;
+  display: inline-bloc
+} */
 
 input, button {
     margin-top: 10px;

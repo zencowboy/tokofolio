@@ -82,6 +82,9 @@
           %>
           <td><%= current%></td>
           <td style='color: <%=profit>0?'green':'red'%>'><%= profit %></td>
+          <td> <a class="btn btn-danger" href="/users/dashboard/<%= item.portfolio %>/edit">Remove</a>
+            <form method="POST" action="/users/dashboard/<%= item.portfolio %>?_method=PATCH">
+              <button type="submit" class="btn btn-danger">Remove</button></form>
         </tr>
         <% 
        total += profit;
