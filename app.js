@@ -60,6 +60,9 @@ app.get('/', coinsController.listCoins)
 // show route
 app.get('/coin-portfolio/', coinsController.showCoins)
 
+// show route
+app.get('/coin-portfolio-data/', coinsController.showCoinsData)
+
 // user registration form route
 app.get('/users/register', usersController.showRegistrationForm)
 

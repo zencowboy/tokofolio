@@ -61,7 +61,29 @@ const controllers = {
             console.log('API call error:', err.message);
           });
 
-    }
+    },
+    showCoinsData: (req, res) => {
+      let search = req.query.search
+                          loginStatus: Boolean(req.session.user)
+
+      const requestOptions = {
+          method: 'GET',
+          uri: `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=${search}`,
+          headers: {
+            'X-CMC_PRO_API_KEY': 'f7eb16ab-8a3c-4086-8d33-1e76b4cfe6d3'
+          },
+          json: true,
+          gzip: true
+        };
+        
+        rp(requestOptions).then(response => {
+          res.json(response.data);
+        }).catch((err) => {
+          console.log('API call error:', err.message);
+        });
+
+  },
+
 }
     
     

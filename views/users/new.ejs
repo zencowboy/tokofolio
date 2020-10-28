@@ -10,9 +10,6 @@
     
     <title>Tokofolio</title>
     <style>
-      .title{
-       padding: 10px;
-      }
       .search {
         margin-top: 50px;
       }
@@ -47,10 +44,10 @@
     </div>
   </nav>
 <div class="container login">   
-  <img class="mb-4" src="/../tokofolio_logo1.svg" alt="200" width="200" height="300">
-      
-  <h1 class="h3 mb-3 font-weight-normal" id= title>Add New Token</h1><a href = '/'><button type="submit" class="btn btn-primary btn-lg" id= "search" >Search</button></a>
-
+  <img class="mt-5 mb-4" src="/../tokofolio_logo1.svg" alt="200" width="200">
+      <div class = "row">
+  <div class="h3 col-md-7 font-weight-normal" id= title>Add New Token</div><a class="col-md-5" href = '/'><button type="submit" class="btn btn-primary btn" id= "search" >Search</button></a>
+    </div>
 <form method="POST" action="/users/dashboard/new">
     <div class="form-group">
     
