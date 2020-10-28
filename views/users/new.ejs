@@ -9,26 +9,47 @@
     <link rel="stylesheet" href="../../user_style.css">
     
     <title>Tokofolio</title>
+    <style>
+      .title{
+       padding: 10px;
+      }
+      .search {
+        margin-top: 50px;
+      }
+
+    </style>
 </head>
 <body class="text-center" >  
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/../users/login">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/../users/register">Register</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<div class="container login">         
-    <h1>Add new Token</h1>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto align-items-baseline">
+        <li class="nav-item active">
+          <a class="nav-link" href="/"><img src="/./../tokofolio_logo1.svg" alt width='72' height='72'> <span class="sr-only"></span></a>
+        </li> 
+       <%if(loginStatus){%>
+          <li class="nav-item">
+            <a class="nav-link" href="/../users/logout">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/../users/dashboard">My Tokofolio</a>
+          </li>
+         <%}else{%>
+          <li class="nav-item">
+            <a class="nav-link" href="/../users/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/../users/register">Register</a>
+          </li>
+          
+        <%}%>
+      </ul>
+    </div>
+  </nav>
+<div class="container login">   
+  <img class="mb-4" src="/../tokofolio_logo1.svg" alt="200" width="200" height="300">
+      
+  <h1 class="h3 mb-3 font-weight-normal" id= title>Add New Token</h1><a href = '/'><button type="submit" class="btn btn-primary btn-lg" id= "search" >Search</button></a>
 
 <form method="POST" action="/users/dashboard/new">
     <div class="form-group">
@@ -37,15 +58,15 @@
     </div>
     <div class="form-group">
    
-      <input type="date" placeholder="Date" STYLE="color: grey; font-family: Verdana; font-weight: bold; font-size: 15px; background-color: #87bbf0;" size="30" maxlength="30" class="form-control" id="date" name="date">
+      <input type="date" placeholder="Date" STYLE="color: grey; font-family: Verdana; font-weight: bold; font-size: 15px; background-color: white;" size="30" maxlength="30" class="form-control" id="date" name="date">
     </div>
     <div class="form-group">
       
-        <input type="text"placeholder="Quantity" STYLE="color: grey; font-family: Verdana; font-weight: bold; font-size: 15px; background-color: #87bbf0;" size="30" maxlength="30" class="form-control" id="qty" name="qty">
+        <input type="text"placeholder="Quantity" STYLE="color: grey; font-family: Verdana; font-weight: bold; font-size: 15px; background-color: white;" size="30" maxlength="30" class="form-control" id="qty" name="qty">
       </div>
       <div class="form-group">
    
-        <input type="text" placeholder="Price" value='<%=inputs.price%>' STYLE="color: grey; font-family: Verdana; font-weight: bold; font-size: 15px; background-color: #87bbf0;" size="30" maxlength="30"class="form-control" id="price" name="price">
+        <input type="text" placeholder="Price" value='<%=inputs.price%>' STYLE="color: grey; font-family: Verdana; font-weight: bold; font-size: 15px; background-color: white;" size="30" maxlength="30"class="form-control" id="price" name="price">
       </div>
      
     <button type="submit" class="btn btn-primary">Submit</button>

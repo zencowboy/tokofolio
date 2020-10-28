@@ -1,0 +1,91 @@
+{
+  "_from": "cryptocurrency-icons",
+  "_id": "cryptocurrency-icons@0.16.1",
+  "_inBundle": false,
+  "_integrity": "sha512-C6y+r56g0ZJzZ9kCbeKa/WXb/oz1elilsaSGjv86T93P0oZWr4v5pxnbtZrEnvHn63qbTxo/Pz3NvzLbKrnQVQ==",
+  "_location": "/cryptocurrency-icons",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "cryptocurrency-icons",
+    "name": "cryptocurrency-icons",
+    "escapedName": "cryptocurrency-icons",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cryptocurrency-icons/-/cryptocurrency-icons-0.16.1.tgz",
+  "_shasum": "33ec0b828c666f773b53866b4b803b2a06c28efc",
+  "_spec": "cryptocurrency-icons",
+  "_where": "/Users/mitchelldeyoung/GIT-REPOS/Tokofolio",
+  "bugs": {
+    "url": "https://github.com/atomiclabs/cryptocurrency-icons/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "A set of icons for all the main cryptocurrencies and altcoins, in a range of styles and sizes",
+  "devDependencies": {
+    "alpha-sort": "^2.0.1",
+    "coinlist": "^3.1.2",
+    "get-svg-colors": "^1.5.1",
+    "globby-cli": "^1.0.1",
+    "husky": "^1.3.1",
+    "svgo": "^1.3.0",
+    "xo": "^0.24.0"
+  },
+  "files": [
+    "32",
+    "32@2x",
+    "128",
+    "svg",
+    "manifest.json"
+  ],
+  "homepage": "http://cryptoicons.co",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run manifest && npm run clean"
+    }
+  },
+  "keywords": [
+    "cryptocurrency",
+    "icons",
+    "icon",
+    "crypto",
+    "currency",
+    "cryptocurrencies",
+    "currencies",
+    "symbols",
+    "svg",
+    "png",
+    "vector",
+    "color",
+    "coin",
+    "bitcoin",
+    "ethereum",
+    "flat-icons",
+    "altcoin",
+    "altcoins",
+    "icon-pack",
+    "icon-set",
+    "erc20-tokens",
+    "erc20",
+    "erc721"
+  ],
+  "license": "CC0-1.0",
+  "name": "cryptocurrency-icons",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atomiclabs/cryptocurrency-icons.git"
+  },
+  "scripts": {
+    "clean": "svgo --multipass --disable=removeViewBox $(globby {svg,originals}/**/*.svg)",
+    "manifest": "node scripts/manifest.js",
+    "test": "xo"
+  },
+  "version": "0.16.1"
+}

@@ -92,7 +92,7 @@ const controllers = {
 
                 // combine DB user salt with given password, and apply hash algo
                 const hash = SHA256(result.pwsalt + req.body.password).toString()
-
+                
                 // check if password is correct by comparing hashes
                 if (hash !== result.hash) {
                     console.log('err: hash does not match')
@@ -155,8 +155,12 @@ const controllers = {
     },
 
     newToken: (req, res) => {
+       
+        
         res.render("users/new",{
-            inputs:req.query 
+            
+            loginStatus: Boolean(req.session.user),      
+            inputs:req.query, 
         })
     },
 
@@ -196,16 +200,24 @@ const controllers = {
         // find the document in DB,
         // to ensure that whatever the user
         // wants to edit, is actually present
-        PortfolioModel.findOne(
+        UserModel.findOne(
             {
                 email: req.session.user.email//'kevin@gmail.com'
             }
         )
-            .then(result => {
+            .then(result =>{
+                let portfolio = result.portfolio
 
-                PortfolioModel.update(
+                portfolio.splice(req.body.index,1)
+                req.session.user.portfolio = portfolio
+                UserModel.updateOne(
                     {
-                       portfolio: []
+                        email: req.session.user.email//'kevin@gmail.com'
+                    },
+                    {
+                        $set:{
+                            portfolio: portfolio
+                        }
                     }
                 )
                     .then(updateResult => {
@@ -222,6 +234,61 @@ const controllers = {
                 res.redirect('/users/dashboard')
             })
     },
+    editPortfolio: (req, res) => {
+
+        // find the document in DB,
+        // to ensure that whatever the user
+        // wants to edit, is actually present
+        UserModel.findOne(
+            {
+                email: req.session.user.email//'kevin@gmail.com'
+            }
+        )
+            .then(result =>{
+                let portfolio = result.portfolio
+                let {index,...rest} = req.body
+
+                portfolio[index] = rest
+                req.session.user.portfolio = portfolio
+                UserModel.updateOne(
+                    {
+                        email: req.session.user.email//'kevin@gmail.com'
+                    },
+                    {
+                        $set:{
+                            portfolio: portfolio
+                        }
+                    }
+                )
+                    .then(updateResult => {
+                        res.redirect('/users/dashboard')
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        res.redirect('/users/dashboard')
+                    })
+
+            })
+            .catch(err => {
+                console.log(err)
+                res.redirect('/users/dashboard')
+            })
+    },
+    deleteAccount: (req, res) => {
+        UserModel.deleteOne({
+            email: req.session.user.email//'kevin@gmail.com'
+        })
+        .then(result => {
+            req.session.destroy(function(err) {
+                console.log(err)
+            })
+            res.redirect('/')
+        })
+        .catch(err => {
+            console.log(err)
+            res.redirect('/')
+        })   
+    }
   
 }
 

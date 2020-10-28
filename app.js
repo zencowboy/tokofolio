@@ -88,6 +88,14 @@ app.get('/users/dashboard', usersController.dashboard)
 // update/delete route
 app.patch('/users/dashboard', usersController.updatePortfolio)
 
+// edit portfolio item
+app.patch('/user/portfolio', usersController.editPortfolio)
+
+// delete route
+app.delete('/users/delete', usersController.deleteAccount)
+
+
+
 
 // / =======================================
 //              LISTENER
