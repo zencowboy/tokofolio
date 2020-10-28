@@ -29,7 +29,7 @@
             <form method='GET' style='position: relative' onsubmit="return searchCoins()">
             <input type="text" class='shadow-lg' placeholder="Search tokens" name="search" size="50" />
             <button id="button" style=' position: absolute; right: 50px'><i class="fas fa-search"></i></button>
-         
+         </form>
           </div>
         </div>
         <div class="spinner">Spinner</div>
@@ -76,6 +76,7 @@
             .done(function(result) {
               $('.spinner').hide();
             $('.search-list').show();
+            
             Object.values(result).forEach(item => {
               $('.search-list li:eq(0)').html(""+item.name);
               $('.search-list li:eq(1) img').attr("src", "/cryptocurrency_icons/svg/color/"+item.symbol.toLowerCase()+".svg")
@@ -85,9 +86,9 @@
               $('.search-list li:eq(5)').html("Percent change last 1h: "+item.quote.USD.percent_change_1h)
               $('.search-list li:eq(6)').html("Percent change last 24h: "+item.quote.USD.percent_change_24h)
               $('.search-list li:eq(7)').html("Percent change last day: "+item.quote.USD.percent_change_7d)
-              $('.search-list a').attr("href", "/users/dashboard/new?symbol="+item.symbol.price.item.quote.USD.price)
+              $('.search-list a').attr("href", "/users/dashboard/new?symbol="+item.symbol+"&price=" +item.quote.USD.price)
               
-              console.log(item.symbol)
+          
             });
 
               console.log( result );
