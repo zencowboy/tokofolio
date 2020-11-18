@@ -120,7 +120,7 @@
             let profit = (current - item.price) * item.qty
           %>
           <td><%= current%></td>
-          <td style='color: <%=profit>0?'green':'red'%>'><%= profit %></td>
+          <td style='color:<%= profit>0?'green':'red'%>'><%= profit %></td>
           <td>
             <div class="d-flex">
               <button class="btn btn-primary btn-sm" onclick='edit("<%= item.symbol%>","<%= item.date%>","<%= item.qty%>","<%= item.price%>","<%=index%>")'>Edit</button>
